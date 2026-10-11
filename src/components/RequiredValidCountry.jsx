@@ -1,19 +1,24 @@
-import {Navigate ,Outlet, useLocation, useParams} from "react-router";
+import { Navigate, Outlet, useParams } from "react-router";
 import COUNTRIES from "../data/countries";
 
-const RequiredValidCountry = () => {
-    const { countryCode } = useParams();
-    const location = useLocation();
+const RequireValidCountry = () => {
+  const { countryCode } = useParams();
 
-    const exists = COUNTRIES.some((c) => c.code === countryCode.toUpperCase());
+  const exists = COUNTRIES.some(
+    (c) => c.code === countryCode?.toUpperCase()
+  );
 
-    if (!exists) {
-        return (
-            <Navigate to="/countries" state={{ from: location }} replace /> 
-        );
-    }
+  if (!exists) {
+    return (
+      <Navigate
+        to="/countries"
+        state={{ missingCode: countryCode }}
+        replace
+      />
+    );
+  }
 
-    return <Outlet />;
+  return <Outlet />;
 };
 
-export default RequiredValidCountry;
+export default RequireValidCountry;

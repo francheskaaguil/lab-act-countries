@@ -3,15 +3,12 @@ import { NavLink, Outlet } from "react-router";
 const Layout = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      
-      <nav className="h-14 flex items-center justify-between px-5 shadow">
-        
+      <nav className="h-14 flex items-center justify-between px-5 shadow">       
         <div className="flex items-center gap-2">
           <span className="font-bold">Countries of the World</span>
         </div>
 
-        <div className="flex gap-5">
-          
+        <div className="flex gap-5">       
           <NavLink to="/" end>
             {({ isActive }) => (
               <p className={`text-[12px] ${isActive ? "font-bold text-blue-600" : ""}`}>
