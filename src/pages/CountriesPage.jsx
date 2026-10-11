@@ -1,10 +1,27 @@
 import { Link } from "react-router";
 import COUNTRIES from "../data/countries";
+import { useLocation , useNavigate } from "react-router";
+import { useEffect, useState } from "react";
 
 const CountriesPage = () => {
+  const { pathname, state} = useLocation();
+  const navigate = useNavigate();
+  
   return (
+
+    useEffect(() => {
+      if (state?.from === pathname) {
+        navigate("/countries", { replace: true });
+      }
+    }, [state, pathname, navigate]);
+
     <div className="max-w-4xl mx-auto">
-      
+      {state?.missingCode && (
+        <div className="alert alert-warning mb-4">
+          <span> We don&apos;t have a country with code &quot;{state.missingCode}&
+quot;. </span>
+        </div>
+      )}
       <h1 className="text-3xl font-bold mb-4">
         Countries
       </h1>
